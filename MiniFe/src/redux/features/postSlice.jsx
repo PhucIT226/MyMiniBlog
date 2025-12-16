@@ -1,16 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const fetchPosts = createAsyncThunk("posts/fetch", async () => {
-  const res = await axios.get("http://localhost:8080/api/blog/getBlog");
+  const res = await axios.get(`${API_URL}/blog/getBlog`);
   return res.data;
 });
 export const addPosts = createAsyncThunk("posts/add", async (post) => {
-  const res = await axios.post("http://localhost:8080/api/blog/postBlog", post);
+  const res = await axios.post(`${API_URL}/blog/postBlog`, post);
   return res.data;
 });
 export const deletePosts = createAsyncThunk("posts/delete", async (id) => {
-  await axios.delete(`http://localhost:8080/api/blog/deleteBlog/${id}`);
+  await axios.delete(`${API_URL}/blog/deleteBlog/${id}`);
   return id;
 });
 
